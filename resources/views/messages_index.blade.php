@@ -1,4 +1,3 @@
-hello
 <!-- resources/views/create.blade.php -->
 <h1>Create a New Message</h1>
 
@@ -15,6 +14,16 @@ hello
 
     <button type="submit">Submit</button>
 </form>
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
 @foreach ($messages as $message)
     Name: {{ $message->name }}<br>
