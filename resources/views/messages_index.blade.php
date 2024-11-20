@@ -4,7 +4,10 @@
 <form method="POST" action="{{ url('/messages') }}">
     @csrf
     <label for="name">Name:</label>
-    <input type="text" name="name" id="name" required><br><br>
+    <input type="text" name="name" id="name"  value="{{old('name')}}" class="@error('name') is-invalid @enderror" required><br><br>
+    @error('name')
+    <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
 
     <label for="email">Email:</label>
     <input type="email" name="email" id="email" required><br><br>
