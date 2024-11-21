@@ -1,6 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Create a New Message</title>
+
     <style>
         .container {
             max-width: 400px;
@@ -43,10 +48,39 @@
         }
 
         .messages {
-            padding: 30px 20px;
+            font-family: Arial, sans-serif;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 10px 0;
         }
+
+        .messages .message {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .messages .message h4 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .messages .message p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 5px;
+        }
+
+        .messages .message .created-at {
+            font-size: 12px;
+            color: #999;
+        }
+
     </style>
-    <title>Create a New Message</title>
+
 </head>
 <body>
 
@@ -66,7 +100,7 @@
             @enderror
 
             <label for="message">Message:</label>
-            <textarea name="message" id="message" required></textarea>
+            <textarea name="message" id="message" required>{{ old('message') }}</textarea>
             @error('message')
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -75,10 +109,12 @@
     </form>
     <div class="messages">
         @foreach ($messages as $message)
-            Name: {{ $message->name }}<br>
-            Email: {{ $message->email }}<br>
-            Message: {{ $message->message }}<br>
-            Created At: {{ $message->created_at }}<br>
+            <div class="message">
+                <h4>Name: {{ $message->name }}</h4>
+                <p>Email: {{ $message->email }}</p>
+                <p>Message: {{ $message->message }}</p>
+                <p class="created-at">Created At: {{ $message->created_at}} </p>
+            </div>
             <hr>
         @endforeach
     </div>

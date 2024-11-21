@@ -7,7 +7,7 @@ use App\Models\Message;
 
 class MessageController extends Controller
 {
-    public function index()
+    public function index(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application
     {
         $messages = Message::latest()->get();
 
@@ -15,7 +15,7 @@ class MessageController extends Controller
 
     }
 
-    public function store(Request $request)
+    public function store(Request $request): \Illuminate\Foundation\Application|\Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
     {
         $data = $request->validate([
             'name' => 'bail|required|alpha|max:20|min:3',
